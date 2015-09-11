@@ -325,11 +325,52 @@ write_files:
     path: /root/README_SSL.txt
     permissions: 0700
 
-
   - content: |
         net.ipv6.conf.all.disable_ipv6 = 1
         net.ipv6.conf.default.disable_ipv6 = 1
     path: /etc/sysctl.d/00-disable-ipv6.conf
+    permissions: 0644
+
+  - content: |
+        [delorean-liberty-testing]
+        name=delorean-liberty-testing
+        baseurl=http://cbs.centos.org/repos/cloud7-openstack-liberty-testing/$basearch/os/
+        enabled=1
+        gpgcheck=0
+        priority=2
+
+        [delorean-common-testing]
+        name=delorean-common-testing
+        baseurl=http://cbs.centos.org/repos/cloud7-openstack-common-testing/$basearch/os/
+        enabled=1
+        gpgcheck=0
+        priority=2
+    path: /home/centos-master/delorean/data/repos/delorean-deps.repo
+    permissions: 0644
+
+  - content: |
+        [delorean-liberty-testing]
+        name=delorean-liberty-testing
+        baseurl=https://copr-be.cloud.fedoraproject.org/results/apevec/RDO-Liberty/fedora-22-$basearch/
+        enabled=1
+        gpgcheck=0
+        priority=2
+
+        [openstack-kilo]
+        name=openstack-kilo
+        baseurl=http://repos.fedorapeople.org/repos/openstack/openstack-kilo/f22/
+        enabled=1
+        gpgcheck=0
+    path: /home/fedora-master/delorean/data/repos/delorean-deps.repo
+    permissions: 0644
+
+  - content: |
+        [openstack-kilo]
+        name=openstack-kilo
+        baseurl=http://repos.fedorapeople.org/repos/openstack/openstack-kilo/el7/
+        enabled=1
+        gpgcheck=0
+    path: /home/centos-kilo/delorean/data/repos/delorean-deps.repo
     permissions: 0644
 
 bootcmd:
